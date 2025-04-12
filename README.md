@@ -19,7 +19,7 @@ A simple task management app built using **React.js**. Add, edit, and delete tas
 
 ## 📸 Preview
 
-![Screenshot](screenshot.png) <!-- Add screenshot image if you want -->
+![Screenshot](/public/image.png) <!-- Add screenshot image if you want -->
 
 ---
 
