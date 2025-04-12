@@ -4,28 +4,34 @@ A simple task management app built using **React.js**. Add, edit, and delete tas
 
 ---
 
+## 🔗 Live Demo
+
+[👉 Click here to view the live demo](https://task-manager-eta-gilt.vercel.app/)
+
+---
+
 ## 🚀 Features
 
-- ✅ Add new tasks
-- ✅ Edit existing tasks
-- ✅ Delete tasks
-- ✅ Inline validation (no empty tasks allowed)
-- ✅ Message alerts for success/error
-- ✅ Shows "No tasks added yet" when empty
-- ✅ Clean UI with inline styles
+- ✅ Add new tasks  
+- ✅ Edit existing tasks  
+- ✅ Delete tasks  
+- ✅ Inline validation (no empty tasks allowed)  
+- ✅ Message alerts for success/error  
+- ✅ Shows "No tasks added yet" when empty  
+- ✅ Clean UI with inline styles  
 - ✅ Fully client-side (no backend)
 
 ---
 
 ## 📸 Preview
 
-![Screenshot](/public/image.png) <!-- Add screenshot image if you want -->
+![Screenshot](/public/image.png) 
 
 ---
 
 ## 🛠️ Tech Stack
 
-- React.js (Created using [Vite](https://vitejs.dev/) or `create-react-app`)
+- React.js (Created using Vite or `create-react-app`)
 - JavaScript (ES6)
 - CSS (Inline styling)
 
@@ -44,4 +50,4 @@ cd task-manager
 npm install
 
 # 4. Run the development server
-npm run dev  
+npm run dev
