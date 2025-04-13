@@ -21,7 +21,7 @@ A feature-rich task management app built using **React.js**. Add, edit, complete
 - ✅ Icons for actions (edit, delete, theme toggle)  
 - ✅ Inline validation (no empty tasks allowed)  
 - ✅ Success/Error message alerts  
-- ✅ Shows "No tasks added yet" when empty  
+- ✅ Shows "No tasks added yet" when empty 
 - ✅ Message when task is added or updated  
 - ✅ Clean, responsive UI with inline styles  
 - ✅ Fully client-side (no backend)
