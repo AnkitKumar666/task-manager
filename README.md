@@ -9,7 +9,7 @@ A feature-rich task management app built using **React.js**. Add, edit, complete
 [👉 Click here to view the live demo](https://task-manager-eta-gilt.vercel.app/)
 
 ---
- 
+
 ## 🚀 Features
 
 - ✅ Add new tasks with button or `Enter` key  
