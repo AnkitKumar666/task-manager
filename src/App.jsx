@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import './App.css'
+import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun, Pencil, Trash2 } from "lucide-react";
+import "./App.css";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -7,7 +9,8 @@ function App() {
     const [isEditing, setIsEditing] = useState(false);
     const [currentEditId, setCurrentEditId] = useState(null);
     const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState("success"); // 'success' or 'error'
+    const [messageType, setMessageType] = useState("success");
+    const [darkMode, setDarkMode] = useState(true); // default is dark mode
 
     const addOrUpdateTask = () => {
         if (input.trim() === "") {
@@ -24,7 +27,11 @@ function App() {
             );
             setMessage("Task updated!");
         } else {
-            const newTask = { id: Date.now(), text: input };
+            const newTask = {
+                id: Date.now(),
+                text: input,
+                completed: false,
+            };
             setTasks([...tasks, newTask]);
             setMessage("Task added!");
         }
@@ -50,7 +57,14 @@ function App() {
         setCurrentEditId(task.id);
     };
 
-    // Clear messages after 3 seconds
+    const toggleComplete = (id) => {
+        setTasks((prev) =>
+            prev.map((task) =>
+                task.id === id ? { ...task, completed: !task.completed } : task
+            )
+        );
+    };
+
     useEffect(() => {
         if (message !== "") {
             const timer = setTimeout(() => setMessage(""), 3000);
@@ -58,9 +72,27 @@ function App() {
         }
     }, [message]);
 
+    const toggleTheme = () => setDarkMode(!darkMode);
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") addOrUpdateTask();
+    };
+
+    const themeStyles = {
+        backgroundColor: darkMode ? "#1e1e1e" : "#fff",
+        color: darkMode ? "#f0f0f0" : "#333",
+    };
+
+    const inputBg = darkMode ? "#2c2c2c" : "#fff";
+
     return (
-        <div style={styles.container}>
-            <h2>Task Manager</h2>
+        <div style={{ ...styles.container, ...themeStyles }}>
+            <div style={styles.header}>
+                <h2>Task Manager</h2>
+                <button onClick={toggleTheme} style={styles.themeButton}>
+                    {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
+            </div>
 
             {message && (
                 <div
@@ -82,11 +114,16 @@ function App() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Enter a task..."
-                    style={styles.input}
+                    style={{
+                        ...styles.input,
+                        backgroundColor: inputBg,
+                        color: themeStyles.color,
+                    }}
                 />
                 <button onClick={addOrUpdateTask} style={styles.addButton}>
-                    {isEditing ? "Update Task" : "Add Task"}
+                    {isEditing ? "Update" : "Add"}
                 </button>
             </div>
 
@@ -94,25 +131,43 @@ function App() {
                 <p style={styles.noTaskText}>No tasks added yet.</p>
             ) : (
                 <ul style={styles.taskList}>
-                    {tasks.map((task) => (
-                        <li key={task.id} style={styles.taskItem}>
-                            {task.text}
-                            <div style={styles.buttonGroup}>
-                                <button
-                                    onClick={() => editTask(task)}
-                                    style={styles.editButton}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => deleteTask(task.id)}
-                                    style={styles.deleteButton}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </li>
-                    ))}
+                    <AnimatePresence>
+                        {tasks.map((task) => (
+                            <motion.li
+                                key={task.id}
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, x: 50 }}
+                                transition={{ duration: 0.2 }}
+                                style={{
+                                    ...styles.taskItem,
+                                    textDecoration: task.completed ? "line-through" : "none",
+                                    color: task.completed ? "#999" : themeStyles.color,
+                                }}
+                            >
+                                <div style={styles.leftGroup}>
+                                    <input
+                                        type="checkbox"
+                                        checked={task.completed}
+                                        onChange={() => toggleComplete(task.id)}
+                                        style={styles.checkbox}
+                                    />
+                                    <span>{task.text}</span>
+                                </div>
+                                <div style={styles.buttonGroup}>
+                                    <button onClick={() => editTask(task)} style={styles.iconBtn}>
+                                        <Pencil size={16} />
+                                    </button>
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
+                                        style={styles.iconBtn}
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
+                            </motion.li>
+                        ))}
+                    </AnimatePresence>
                 </ul>
             )}
         </div>
@@ -121,12 +176,18 @@ function App() {
 
 const styles = {
     container: {
-        maxWidth: "400px",
+        maxWidth: "500px",
         margin: "50px auto",
         padding: "20px",
-        border: "1px solid #ccc",
         borderRadius: "8px",
         fontFamily: "Arial, sans-serif",
+        transition: "all 0.3s ease",
+    },
+    header: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "15px",
     },
     inputContainer: {
         display: "flex",
@@ -137,6 +198,8 @@ const styles = {
         flex: 1,
         padding: "8px",
         fontSize: "16px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
     },
     addButton: {
         padding: "8px 12px",
@@ -154,6 +217,14 @@ const styles = {
         textAlign: "center",
         fontWeight: "bold",
     },
+    themeButton: {
+        backgroundColor: "#007BFF",
+        color: "white",
+        border: "none",
+        padding: "6px 10px",
+        borderRadius: "6px",
+        cursor: "pointer",
+    },
     taskList: {
         listStyle: "none",
         padding: 0,
@@ -161,34 +232,35 @@ const styles = {
     taskItem: {
         display: "flex",
         justifyContent: "space-between",
-        padding: "8px",
-        borderBottom: "1px solid #eee",
         alignItems: "center",
+        padding: "10px",
+        borderBottom: "1px solid #eee",
+        borderRadius: "4px",
+    },
+    leftGroup: {
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
     },
     buttonGroup: {
         display: "flex",
-        gap: "6px",
+        gap: "8px",
     },
-    editButton: {
-        backgroundColor: "#f0ad4e",
-        color: "white",
+    iconBtn: {
+        backgroundColor: "transparent",
         border: "none",
-        padding: "4px 8px",
         cursor: "pointer",
-        borderRadius: "4px",
-    },
-    deleteButton: {
-        backgroundColor: "#d9534f",
-        color: "white",
-        border: "none",
-        padding: "4px 8px",
-        cursor: "pointer",
-        borderRadius: "4px",
+        color: "#666",
     },
     noTaskText: {
         fontStyle: "italic",
         color: "#888",
         textAlign: "center",
+    },
+    checkbox: {
+        width: "18px",
+        height: "18px",
+        cursor: "pointer",
     },
 };
 
