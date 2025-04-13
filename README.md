@@ -1,5 +1,5 @@
 # 📝 React Task Manager
- 
+  
 A feature-rich task management app built using **React.js**. Add, edit, complete, and delete tasks without refreshing the page — now with light/dark mode, keyboard shortcuts, animations, and icons!
 
 ---
