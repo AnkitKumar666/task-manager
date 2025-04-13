@@ -58,3 +58,7 @@ npm install
 
 # 4. Run the development server
 npm run dev
+
+<!-- Run this command to install required dependencies for animation and icons -->
+<!-- npm install framer-motion lucide-react -->
+
