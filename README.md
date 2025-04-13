@@ -24,7 +24,7 @@ A feature-rich task management app built using **React.js**. Add, edit, complete
 - ✅ Shows "No tasks added yet" when empty 
 - ✅ Message when task is added or updated  
 - ✅ Clean, responsive UI with inline styles  
-- ✅ Fully client-side (no backend)
+- ✅ Fully client-side (no backend) 
 
 ---
 
