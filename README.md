@@ -32,7 +32,7 @@ A feature-rich task management app built using **React.js**. Add, edit, complete
 
 ![Screenshot](/public/image.png) 
  
----
+--- 
 
 ## 🛠️ Tech Stack
 
