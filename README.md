@@ -1,24 +1,29 @@
 # 📝 React Task Manager
 
-A simple task management app built using **React.js**. Add, edit, and delete tasks without refreshing the page.
+A feature-rich task management app built using **React.js**. Add, edit, complete, and delete tasks without refreshing the page — now with light/dark mode, keyboard shortcuts, animations, and icons!
 
 ---
- 
+
 ## 🔗 Live Demo  
 
 [👉 Click here to view the live demo](https://task-manager-eta-gilt.vercel.app/)
- 
+
 ---
 
 ## 🚀 Features
 
-- ✅ Add new tasks  
+- ✅ Add new tasks with button or `Enter` key  
 - ✅ Edit existing tasks  
 - ✅ Delete tasks  
+- ✅ Mark tasks as completed with checkbox  
+- ✅ Light/Dark mode toggle (default: **Dark**)  
+- ✅ Framer Motion animation for task transitions  
+- ✅ Icons for actions (edit, delete, theme toggle)  
 - ✅ Inline validation (no empty tasks allowed)  
-- ✅ Message alerts for success/error  
+- ✅ Success/Error message alerts  
 - ✅ Shows "No tasks added yet" when empty  
-- ✅ Clean UI with inline styles  
+- ✅ Message when task is added or updated  
+- ✅ Clean, responsive UI with inline styles  
 - ✅ Fully client-side (no backend)
 
 ---
@@ -31,8 +36,10 @@ A simple task management app built using **React.js**. Add, edit, and delete tas
 
 ## 🛠️ Tech Stack
 
-- React.js (Created using Vite or `create-react-app`)
-- JavaScript (ES6)
+- React.js (Created using Vite)
+- JavaScript (ES6+)
+- Framer Motion (animations)
+- Lucide React (icons)
 - CSS (Inline styling)
 
 ---
